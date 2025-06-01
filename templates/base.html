@@ -8,6 +8,7 @@
 </head>
 <body>
 
+  <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
       <a class="navbar-brand" href="/">Belém Tour</a>
@@ -33,21 +34,54 @@
             </li>
           {% endif %}
         </ul>
-
-        <!-- Botão à direita da navbar -->
         <div class="d-flex">
-          <a href="{% url 'lista_passeios' %}" class="btn btn-outline-light">
-            Ver Passeios
-          </a>
+          <a href="{% url 'lista_passeios' %}" class="btn btn-outline-light">Ver Passeios</a>
         </div>
       </div>
     </div>
   </nav>
 
+  <!-- Mensagens -->
+  {% if messages %}
+  <div class="container mt-3">
+    {% for message in messages %}
+      <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <!-- Conteúdo principal -->
   <div class="container mt-4">
     {% block content %}{% endblock %}
   </div>
 
+  <!-- Rodapé -->
+  <footer class="bg-dark text-light fixed-bottom">
+  <div class="container py-3">
+    <div class="row">
+      <div class="col-md-6 text-start">
+        <strong>Belém Tour</strong><br>
+        Conta bancária: Banco do Brasil - Ag. 1234 - C/C 56789-0<br>
+        Pix: contato@belemtour.com
+      </div>
+      <div class="col-md-6 text-end d-none d-md-block">
+        <span>Siga-nos:</span><br>
+        <a href="#" class="text-light me-2">Instagram</a>
+        <a href="#" class="text-light ms-2">Facebook</a>
+      </div>
+
+  <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Máscara para campos (opcional) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/imask/6.4.2/imask.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const dateFields = document.querySelectorAll('input[type="date"]');
+      dateFields.forEach(field => {
+        IMask(field, { mask: Date, pattern: 'Y-`m-`d' });
+      });
+    });
+  </script>
 </body>
 </html>

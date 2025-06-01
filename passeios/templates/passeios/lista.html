@@ -3,18 +3,56 @@
 
 {% block content %}
 <div class="container mt-5">
-  <h2>Passeios Disponíveis</h2>
-  <ul class="list-group">
+  <h2 class="mb-4">Passeios Disponíveis</h2>
+
+  <!-- Formulário de Filtro -->
+  <form method="get" class="row g-3 mb-4">
+    <div class="col-md-3">
+      <label class="form-label">Data a partir de:</label>
+      {{ form.data_min }}
+    </div>
+    <div class="col-md-3">
+      <label class="form-label">Até:</label>
+      {{ form.data_max }}
+    </div>
+    <div class="col-md-3">
+      <label class="form-label">Preço até:</label>
+      {{ form.preco_max }}
+    </div>
+    <div class="col-md-3 d-flex align-items-end">
+      <button type="submit" class="btn btn-primary w-100">Filtrar</button>
+    </div>
+  </form>
+
+  <!-- Campo de busca local -->
+  <input type="text" id="busca" class="form-control mb-3" placeholder="Buscar por título ou local...">
+
+  <!-- Lista de Passeios -->
+  <ul class="list-group" id="lista-passeios">
     {% for passeio in passeios %}
-    <li class="list-group-item">
-      <a href="{% url 'agendar_passeio' passeio.id %}">
+    <li class="list-group-item passeio-item">
+      <a href="{% url 'detalhe_passeio' passeio.id %}" class="text-decoration-none text-dark">
         <strong>{{ passeio.titulo }}</strong>
       </a><br>
-      <small>{{ passeio.local }} – {{ passeio.data }}</small>
+      <small>
+        📍 {{ passeio.local }} – 📅 {{ passeio.data }} – 💰 R$ {{ passeio.preco }}
+      </small><br>
+      <strong>Vagas:</strong> {{ passeio.vagas_disponiveis }}
     </li>
     {% empty %}
-    <li class="list-group-item">Nenhum passeio encontrado.</li>
+    <li class="list-group-item">Nenhum passeio encontrado com esses filtros.</li>
     {% endfor %}
   </ul>
 </div>
+
+<!-- Busca dinâmica com JavaScript -->
+<script>
+  document.getElementById("busca").addEventListener("keyup", function () {
+    const termo = this.value.toLowerCase();
+    document.querySelectorAll(".passeio-item").forEach(function (item) {
+      const texto = item.textContent.toLowerCase();
+      item.style.display = texto.includes(termo) ? "" : "none";
+    });
+  });
+</script>
 {% endblock %}

@@ -11,6 +11,12 @@
       <strong>Data:</strong> {{ agendamento.data_agendada }}<br>
       <strong>Pessoas:</strong> {{ agendamento.quantidade_pessoas }}<br>
       <strong>Confirmado:</strong> {{ agendamento.confirmado|yesno:"Sim,Não" }}
+      <a href="{% url 'cancelar_agendamento' agendamento.id %}" class="btn btn-danger btn-sm mt-2">
+  Cancelar
+</a>
+<a href="{% url 'reagendar_agendamento' agendamento.id %}" class="btn btn-warning btn-sm mt-2">Reagendar</a>
+
+
     </li>
     {% empty %}
     <li class="list-group-item">Você ainda não agendou nenhum passeio.</li>

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}Reagendar Passeio{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <h3>Reagendar: {{ agendamento.passeio.titulo }}</h3>
+
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-success">Atualizar Agendamento</button>
+    <a href="{% url 'meus_agendamentos' %}" class="btn btn-secondary">Cancelar</a>
+  </form>
+</div>
+{% endblock %}
