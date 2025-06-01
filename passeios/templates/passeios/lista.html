@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %}Lista de Passeios{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <h2>Passeios Disponíveis</h2>
+  <ul class="list-group">
+    {% for passeio in passeios %}
+    <li class="list-group-item">
+      <a href="{% url 'agendar_passeio' passeio.id %}">
+        <strong>{{ passeio.titulo }}</strong>
+      </a><br>
+      <small>{{ passeio.local }} – {{ passeio.data }}</small>
+    </li>
+    {% empty %}
+    <li class="list-group-item">Nenhum passeio encontrado.</li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}Lista de Passeios{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <h2>Lista de Passeios</h2>
+  <ul class="list-group">
+    {% for passeio in passeios %}
+    <li class="list-group-item">
+      <strong>{{ passeio.titulo }}</strong><br>
+      <em>{{ passeio.local }}</em> — {{ passeio.data }}<br>
+      <strong>Preço:</strong> R$ {{ passeio.preco }}<br>
+
+      {# <-- AQUI ENTRA O BOTÃO DE AGENDAR #}
+      {% if user.is_authenticated %}
+        <a href="{% url 'criar_agendamento_com_passeio' passeio.id %}" class="btn btn-primary btn-sm mt-2">Agendar</a>
+      {% else %}
+        <p><a href="{% url 'login' %}">Faça login</a para agendar.</p>
+      {% endif %}
+    </li>
+    {% empty %}
+    <li class="list-group-item">Nenhum passeio encontrado.</li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}

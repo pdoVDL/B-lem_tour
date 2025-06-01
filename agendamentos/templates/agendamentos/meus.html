@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %}Meus Agendamentos{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <h2>Meus Agendamentos</h2>
+  <ul class="list-group">
+    {% for agendamento in agendamentos %}
+    <li class="list-group-item">
+      <strong>Passeio:</strong> {{ agendamento.passeio.titulo }}<br>
+      <strong>Data:</strong> {{ agendamento.data_agendada }}<br>
+      <strong>Pessoas:</strong> {{ agendamento.quantidade_pessoas }}<br>
+      <strong>Confirmado:</strong> {{ agendamento.confirmado|yesno:"Sim,Não" }}
+    </li>
+    {% empty %}
+    <li class="list-group-item">Você ainda não agendou nenhum passeio.</li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}

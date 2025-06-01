@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}{{ passeio.titulo }}{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <h2>{{ passeio.titulo }}</h2>
+  <p><strong>Local:</strong> {{ passeio.local }}</p>
+  <p><strong>Data:</strong> {{ passeio.data }}</p>
+  <p><strong>Preço:</strong> R$ {{ passeio.preco }}</p>
+  <p>{{ passeio.descricao }}</p>
+
+  <hr>
+  <h4>Agendar este passeio</h4>
+
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-success">Confirmar Agendamento</button>
+  </form>
+</div>
+{% endblock %}
