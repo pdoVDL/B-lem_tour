@@ -8,15 +8,15 @@
   <!-- Formulário de Filtro -->
   <form method="get" class="row g-3 mb-4">
     <div class="col-md-3">
-      <label class="form-label">Data a partir de:</label>
+      <label for="data_min" class="form-label">Data a partir de:</label>
       {{ form.data_min }}
     </div>
     <div class="col-md-3">
-      <label class="form-label">Até:</label>
+      <label for="data_max" class="form-label">Até:</label>
       {{ form.data_max }}
     </div>
     <div class="col-md-3">
-      <label class="form-label">Preço até:</label>
+      <label for="preco_max" class="form-label">Preço até:</label>
       {{ form.preco_max }}
     </div>
     <div class="col-md-3 d-flex align-items-end">
@@ -35,9 +35,15 @@
         <strong>{{ passeio.titulo }}</strong>
       </a><br>
       <small>
-        📍 {{ passeio.local }} – 📅 {{ passeio.data }} – 💰 R$ {{ passeio.preco }}
+        📍 {{ passeio.local }} — 📅 {{ passeio.data }} — 💰 R$ {{ passeio.preco }}
       </small><br>
       <strong>Vagas:</strong> {{ passeio.vagas_disponiveis }}
+
+      {% if user.is_authenticated %}
+        
+      {% else %}
+        <p class="mt-2"><a href="{% url 'login' %}">Faça login</a> para agendar.</p>
+      {% endif %}
     </li>
     {% empty %}
     <li class="list-group-item">Nenhum passeio encontrado com esses filtros.</li>

@@ -14,7 +14,7 @@
   <h4>Agendar este passeio</h4>
 
   {% if passeio.vagas_disponiveis > 0 %}
-    <form method="post">
+    <form method="post" action="">
       {% csrf_token %}
       {{ agendamento_form.as_p }}
       <button type="submit" name="agendar" class="btn btn-success">Confirmar Agendamento</button>
@@ -37,7 +37,7 @@
 
   <hr>
   <h4>Deixar uma avaliação</h4>
-  <form method="post">
+  <form method="post" action="">
     {% csrf_token %}
     {{ avaliacao_form.as_p }}
     <button type="submit" name="avaliar" class="btn btn-primary">Enviar Avaliação</button>
